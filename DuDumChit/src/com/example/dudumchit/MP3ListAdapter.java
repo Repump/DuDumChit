@@ -20,7 +20,7 @@ import android.widget.TextView;
 public class MP3ListAdapter extends BaseAdapter {
 	private Context mContext;
 	private ArrayList<String> IDList;
-	//private ArrayList<String> albumIDList;
+	// private ArrayList<String> albumIDList;
 	private ArrayList<String> titleList;
 	private ArrayList<String> artistList;
 	private ArrayList<String> durationList;
@@ -29,7 +29,7 @@ public class MP3ListAdapter extends BaseAdapter {
 	public MP3ListAdapter(Context context) {
 		mContext = context;
 		IDList = new ArrayList<String>();
-		//albumIDList = new ArrayList<String>();
+		// albumIDList = new ArrayList<String>();
 		titleList = new ArrayList<String>();
 		artistList = new ArrayList<String>();
 		durationList = new ArrayList<String>();
@@ -48,14 +48,14 @@ public class MP3ListAdapter extends BaseAdapter {
 		Cursor cursor = loader.loadInBackground();
 		if (cursor != null && cursor.moveToFirst()) {
 			String ID;
-			String albumID;
+			// String albumID;
 			String title;
 			String artist;
 			String duration;
 
 			int IDColumn = cursor.getColumnIndex(MediaStore.Audio.Media._ID);
-			int albumIDColumn = cursor
-					.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID);
+			// int albumIDColumn = cursor
+			//		.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID);
 			int titleColumn = cursor
 					.getColumnIndex(MediaStore.Audio.Media.TITLE);
 			int artistColumn = cursor
@@ -64,7 +64,7 @@ public class MP3ListAdapter extends BaseAdapter {
 					.getColumnIndex(MediaStore.Audio.Media.DURATION);
 			do {
 				ID = cursor.getString(IDColumn);
-				albumID = cursor.getString(albumIDColumn);
+				// albumID = cursor.getString(albumIDColumn);
 				title = cursor.getString(titleColumn);
 				artist = cursor.getString(artistColumn);
 				// Convert Duration
@@ -74,7 +74,7 @@ public class MP3ListAdapter extends BaseAdapter {
 				duration = format.format(calendar.getTime());
 
 				IDList.add(ID);
-				//albumIDList.add(albumID);
+				// albumIDList.add(albumID);
 				titleList.add(title);
 				artistList.add(artist);
 				durationList.add(duration);
@@ -111,11 +111,13 @@ public class MP3ListAdapter extends BaseAdapter {
 			listViewItem = inflater.inflate(R.layout.list_item, null);
 		}
 
-		/*// Album Image
-		ImageView album = (ImageView) listViewItem.findViewById(R.id.album);
-		Bitmap albumImage = ReadyActivity.getArtworkQuick(mContext,
-				Integer.parseInt((albumIDList.get(position))), 50, 50);
-		album.setImageBitmap(albumImage);*/
+		/*
+		 * // Album Image ImageView album = (ImageView)
+		 * listViewItem.findViewById(R.id.album); Bitmap albumImage =
+		 * ReadyActivity.getArtworkQuick(mContext,
+		 * Integer.parseInt((albumIDList.get(position))), 50, 50);
+		 * album.setImageBitmap(albumImage);
+		 */
 
 		// Title
 		TextView title = (TextView) listViewItem.findViewById(R.id.title);
