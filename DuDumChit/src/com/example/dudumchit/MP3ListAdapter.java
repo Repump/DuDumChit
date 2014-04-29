@@ -1,6 +1,8 @@
 package com.example.dudumchit;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import android.content.Context;
 import android.content.CursorLoader;
@@ -18,7 +20,7 @@ import android.widget.TextView;
 public class MP3ListAdapter extends BaseAdapter {
 	private Context mContext;
 	private ArrayList<String> IDList;
-	private ArrayList<String> albumIDList;
+	//private ArrayList<String> albumIDList;
 	private ArrayList<String> titleList;
 	private ArrayList<String> artistList;
 	private ArrayList<String> durationList;
@@ -27,7 +29,7 @@ public class MP3ListAdapter extends BaseAdapter {
 	public MP3ListAdapter(Context context) {
 		mContext = context;
 		IDList = new ArrayList<String>();
-		albumIDList = new ArrayList<String>();
+		//albumIDList = new ArrayList<String>();
 		titleList = new ArrayList<String>();
 		artistList = new ArrayList<String>();
 		durationList = new ArrayList<String>();
@@ -65,11 +67,14 @@ public class MP3ListAdapter extends BaseAdapter {
 				albumID = cursor.getString(albumIDColumn);
 				title = cursor.getString(titleColumn);
 				artist = cursor.getString(artistColumn);
-				// Need Convert to Duration
-				duration = Long.toString(cursor.getLong(durationColumn));
+				// Convert Duration
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTimeInMillis(cursor.getLong(durationColumn));
+				SimpleDateFormat format = new SimpleDateFormat("mm:ss");
+				duration = format.format(calendar.getTime());
 
 				IDList.add(ID);
-				albumIDList.add(albumID);
+				//albumIDList.add(albumID);
 				titleList.add(title);
 				artistList.add(artist);
 				durationList.add(duration);
@@ -106,11 +111,11 @@ public class MP3ListAdapter extends BaseAdapter {
 			listViewItem = inflater.inflate(R.layout.list_item, null);
 		}
 
-		// Album Image
+		/*// Album Image
 		ImageView album = (ImageView) listViewItem.findViewById(R.id.album);
 		Bitmap albumImage = ReadyActivity.getArtworkQuick(mContext,
 				Integer.parseInt((albumIDList.get(position))), 50, 50);
-		album.setImageBitmap(albumImage);
+		album.setImageBitmap(albumImage);*/
 
 		// Title
 		TextView title = (TextView) listViewItem.findViewById(R.id.title);
