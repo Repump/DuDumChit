@@ -13,7 +13,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		// ���� ���� ��ư
+		// Start Button
 		Button startButton = (Button) findViewById(R.id.game_start);
 		startButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -24,18 +24,17 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		/*// ȯ�� ���� ��ư
-		Button optionButton = (Button) findViewById(R.id.option);
-		optionButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(getApplicationContext(),
-						OptionActivity.class);
-				startActivity(i);
-			}
-		});*/
+		/*
+		 * // ȯ�� ���� ��ư Button optionButton = (Button)
+		 * findViewById(R.id.option); optionButton.setOnClickListener(new
+		 * OnClickListener() {
+		 * 
+		 * @Override public void onClick(View v) { Intent i = new
+		 * Intent(getApplicationContext(), OptionActivity.class);
+		 * startActivity(i); } });
+		 */
 
-		// ���� ���� ��ư
+		// Exit Button
 		Button exitButton = (Button) findViewById(R.id.exit);
 		exitButton.setOnClickListener(new OnClickListener() {
 			@Override

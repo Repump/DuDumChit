@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -15,6 +14,7 @@ import android.widget.ListView;
 
 public class ReadyActivity extends Activity {
 	Uri uri;
+	String path;
 	Button playButton;
 	MediaPlayer player;
 	MP3ListAdapter adapter;
@@ -24,36 +24,40 @@ public class ReadyActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ready);
 
+		// MP3 List View
 		final ListView MP3List = (ListView) findViewById(R.id.mp3_list);
-
 		adapter = new MP3ListAdapter(getApplicationContext());
-
 		MP3List.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				uri = Uri.withAppendedPath(
-						MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, ""
-								+ adapter.getID(position));
+				// content://media/external/audio/media/#######
+				/*
+				 * uri = Uri.withAppendedPath(
+				 * MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, "" +
+				 * adapter.getID(position));
+				 */
+				path = adapter.getPath(position);
 
 				playButton.setEnabled(true);
 			}
 		});
 		MP3List.setAdapter(adapter);
 
-		//
+		// Play Button
 		playButton = (Button) findViewById(R.id.play);
 		playButton.setEnabled(false);
 		playButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(getApplicationContext(), GameStart.class);
-				i.setData(uri);
+				Intent i = new Intent(getApplicationContext(),
+						GameActivity.class);
+				i.putExtra("path", path);
 				startActivity(i);
 			}
 		});
 
-		//
+		// Back Button
 		Button backButton = (Button) findViewById(R.id.back);
 		backButton.setOnClickListener(new OnClickListener() {
 			@Override
