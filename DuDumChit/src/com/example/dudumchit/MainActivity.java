@@ -13,7 +13,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		// °ÔÀÓ ½ÃÀÛ ¹öÆ°
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°
 		Button startButton = (Button) findViewById(R.id.game_start);
 		startButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		// È¯°æ ¼³Á¤ ¹öÆ°
+		/*// È¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°
 		Button optionButton = (Button) findViewById(R.id.option);
 		optionButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -33,9 +33,9 @@ public class MainActivity extends Activity {
 						OptionActivity.class);
 				startActivity(i);
 			}
-		});
+		});*/
 
-		// °ÔÀÓ Á¾·á ¹öÆ°
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°
 		Button exitButton = (Button) findViewById(R.id.exit);
 		exitButton.setOnClickListener(new OnClickListener() {
 			@Override

@@ -1,19 +1,10 @@
 package com.example.dudumchit;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.ContentUris;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,7 +25,7 @@ public class ReadyActivity extends Activity {
 		setContentView(R.layout.activity_ready);
 
 		final ListView MP3List = (ListView) findViewById(R.id.mp3_list);
-		
+
 		adapter = new MP3ListAdapter(getApplicationContext());
 
 		MP3List.setOnItemClickListener(new OnItemClickListener() {
@@ -44,7 +35,7 @@ public class ReadyActivity extends Activity {
 				uri = Uri.withAppendedPath(
 						MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, ""
 								+ adapter.getID(position));
-				
+
 				playButton.setEnabled(true);
 			}
 		});
@@ -71,6 +62,7 @@ public class ReadyActivity extends Activity {
 			}
 		});
 	}
+
 	/*
 	 * // Draw Bitmap - http://ensider.tistory.com/2 private static final
 	 * BitmapFactory.Options sBitmapOptionsCache = new BitmapFactory.Options();

@@ -2,48 +2,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.mybeat.MainActivity$PlaceholderFragment" >
+    tools:context="com.example.dudumchit.MainActivity" >
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/game_start"
         android:layout_centerHorizontal="true"
         android:contentDescription="@drawable/ic_launcher"
-        android:padding="10sp"
+        android:paddingBottom="10sp"
         android:scaleType="fitCenter"
         android:src="@drawable/dudumchit" />
 
     <Button
         android:id="@+id/game_start"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/option"
+        android:layout_above="@+id/exit"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10sp"
         android:text="@string/game_start" />
 
-    <Button
+   <!--  <Button
         android:id="@+id/option"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_above="@+id/exit"
-        android:layout_marginBottom="20dp"
-        android:text="@string/option" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10sp"
+        android:text="@string/option" /> -->
 
     <Button
         android:id="@+id/exit"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10sp"
         android:text="@string/exit" />
 
 </RelativeLayout>

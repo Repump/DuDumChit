@@ -7,14 +7,13 @@ import java.util.Calendar;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MP3ListAdapter extends BaseAdapter {
@@ -36,26 +35,54 @@ public class MP3ListAdapter extends BaseAdapter {
 		getMP3List();
 	}
 
+	private boolean checkMP3Extension(final String path) {
+		String extension = path;
+		int index = 0;
+
+		while (extension.indexOf('.') != -1) {
+			index = extension.indexOf('.');
+			extension = extension.substring(index + 1);
+		}
+
+		if (extension.equals("mp3") || extension.equals("MP3")) {
+			return true;
+		} else
+			return false;
+	}
+
+	private String getDuration(long millisecond) {
+		String duration;
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(millisecond);
+		SimpleDateFormat format = new SimpleDateFormat("mm:ss");
+		duration = format.format(calendar.getTime());
+		return duration;
+	}
+
 	private void getMP3List() {
 		Uri uri = MediaStore.Audio.Media.getContentUri("external");
+		Log.i("Uri", uri.toString());
 		String[] projection = { MediaStore.Audio.Media._ID,
-				MediaStore.Audio.Media.ALBUM_ID, MediaStore.Audio.Media.DATA,
+		/* MediaStore.Audio.Media.ALBUM_ID, */MediaStore.Audio.Media.DATA,
 				MediaStore.Audio.Media.TITLE, MediaStore.Audio.Media.ARTIST,
 				MediaStore.Audio.Media.DURATION };
 		String selection = null;
 		CursorLoader loader = new CursorLoader(mContext, uri, projection,
 				selection, null, null);
 		Cursor cursor = loader.loadInBackground();
+
 		if (cursor != null && cursor.moveToFirst()) {
 			String ID;
 			// String albumID;
+			String data;
 			String title;
 			String artist;
 			String duration;
 
 			int IDColumn = cursor.getColumnIndex(MediaStore.Audio.Media._ID);
 			// int albumIDColumn = cursor
-			//		.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID);
+			// .getColumnIndex(MediaStore.Audio.Media.ALBUM_ID);
+			int dataColumn = cursor.getColumnIndex(MediaStore.Audio.Media.DATA);
 			int titleColumn = cursor
 					.getColumnIndex(MediaStore.Audio.Media.TITLE);
 			int artistColumn = cursor
@@ -63,15 +90,15 @@ public class MP3ListAdapter extends BaseAdapter {
 			int durationColumn = cursor
 					.getColumnIndex(MediaStore.Audio.Media.DURATION);
 			do {
+				data = cursor.getString(dataColumn);
+				if (!checkMP3Extension(data)) {
+					continue;
+				}
 				ID = cursor.getString(IDColumn);
 				// albumID = cursor.getString(albumIDColumn);
 				title = cursor.getString(titleColumn);
 				artist = cursor.getString(artistColumn);
-				// Convert Duration
-				Calendar calendar = Calendar.getInstance();
-				calendar.setTimeInMillis(cursor.getLong(durationColumn));
-				SimpleDateFormat format = new SimpleDateFormat("mm:ss");
-				duration = format.format(calendar.getTime());
+				duration = getDuration(cursor.getLong(durationColumn));
 
 				IDList.add(ID);
 				// albumIDList.add(albumID);

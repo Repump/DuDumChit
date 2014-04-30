@@ -1,34 +1,58 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.dudumchit.ReadyActivity" >
+
+    <TextView
+        android:id="@+id/music_select"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/holo_green_light"
+        android:gravity="center"
+        android:maxLines="1"
+        android:paddingBottom="8sp"
+        android:paddingTop="8sp"
+        android:text="@string/music_select"
+        android:textSize="18sp"
+        android:textStyle="bold" >
+    </TextView>
 
     <ListView
+        android:scrollbarStyle="outsideInset"
         android:id="@+id/mp3_list"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_above="@+id/play"
-        android:layout_margin="4sp"
-        android:choiceMode="singleChoice" >
+        android:layout_below="@id/music_select"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10sp"
+        android:choiceMode="singleChoice"
+        android:listSelector="#8800FFFF" >
     </ListView>
 
     <Button
         android:id="@+id/back"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="4sp"
+        android:layout_marginBottom="10sp"
         android:text="@string/back" />
 
     <Button
         android:id="@+id/play"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/back"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="4sp"
+        android:layout_marginBottom="10sp"
         android:text="@string/play" />
 
 </RelativeLayout>
