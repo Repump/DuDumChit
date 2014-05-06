@@ -19,7 +19,6 @@ public class MP3ListAdapter extends BaseAdapter {
 	private Context mContext;
 	private ArrayList<String> IDList;
 	private ArrayList<String> pathList;
-	// private ArrayList<String> albumIDList;
 	private ArrayList<String> titleList;
 	private ArrayList<String> artistList;
 	private ArrayList<String> durationList;
@@ -29,7 +28,6 @@ public class MP3ListAdapter extends BaseAdapter {
 		mContext = context;
 		IDList = new ArrayList<String>();
 		pathList = new ArrayList<String>();
-		// albumIDList = new ArrayList<String>();
 		titleList = new ArrayList<String>();
 		artistList = new ArrayList<String>();
 		durationList = new ArrayList<String>();
@@ -63,9 +61,8 @@ public class MP3ListAdapter extends BaseAdapter {
 	private void getMP3List() {
 		Uri uri = MediaStore.Audio.Media.getContentUri("external");
 		String[] projection = { MediaStore.Audio.Media._ID,
-		/* MediaStore.Audio.Media.ALBUM_ID, */MediaStore.Audio.Media.DATA,
-				MediaStore.Audio.Media.TITLE, MediaStore.Audio.Media.ARTIST,
-				MediaStore.Audio.Media.DURATION,
+				MediaStore.Audio.Media.DATA, MediaStore.Audio.Media.TITLE,
+				MediaStore.Audio.Media.ARTIST, MediaStore.Audio.Media.DURATION,
 				MediaStore.Audio.Media.MIME_TYPE };
 		String selection = null;
 		CursorLoader loader = new CursorLoader(mContext, uri, projection,
@@ -74,16 +71,12 @@ public class MP3ListAdapter extends BaseAdapter {
 
 		if (cursor != null && cursor.moveToFirst()) {
 			String ID;
-			// String albumID;
 			String data;
 			String title;
 			String artist;
 			String duration;
-			// String mime;
 
 			int IDColumn = cursor.getColumnIndex(MediaStore.Audio.Media._ID);
-			// int albumIDColumn = cursor
-			// .getColumnIndex(MediaStore.Audio.Media.ALBUM_ID);
 			int dataColumn = cursor.getColumnIndex(MediaStore.Audio.Media.DATA);
 			int titleColumn = cursor
 					.getColumnIndex(MediaStore.Audio.Media.TITLE);
@@ -91,24 +84,19 @@ public class MP3ListAdapter extends BaseAdapter {
 					.getColumnIndex(MediaStore.Audio.Media.ARTIST);
 			int durationColumn = cursor
 					.getColumnIndex(MediaStore.Audio.Media.DURATION);
-			// int mimeColumn =
-			// cursor.getColumnIndex(MediaStore.Audio.Media.MIME_TYPE);
 
 			do {
 				data = cursor.getString(dataColumn);
 				if (!checkMP3Extension(data)) {
 					continue;
 				}
-				// Log.i("MIME", cursor.getString(mimeColumn));
 				ID = cursor.getString(IDColumn);
-				// albumID = cursor.getString(albumIDColumn);
 				title = cursor.getString(titleColumn);
 				artist = cursor.getString(artistColumn);
 				duration = getDuration(cursor.getLong(durationColumn));
 
 				IDList.add(ID);
 				pathList.add(data);
-				// albumIDList.add(albumID);
 				titleList.add(title);
 				artistList.add(artist);
 				durationList.add(duration);
@@ -132,11 +120,6 @@ public class MP3ListAdapter extends BaseAdapter {
 		return position;
 	}
 
-	/*
-	 * public int getID(int position) { return
-	 * Integer.parseInt(IDList.get(position)); }
-	 */
-
 	public String getPath(int position) {
 		return pathList.get(position);
 	}
@@ -149,14 +132,6 @@ public class MP3ListAdapter extends BaseAdapter {
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			listViewItem = inflater.inflate(R.layout.list_item, null);
 		}
-
-		/*
-		 * // Album Image ImageView album = (ImageView)
-		 * listViewItem.findViewById(R.id.album); Bitmap albumImage =
-		 * ReadyActivity.getArtworkQuick(mContext,
-		 * Integer.parseInt((albumIDList.get(position))), 50, 50);
-		 * album.setImageBitmap(albumImage);
-		 */
 
 		// Title
 		TextView title = (TextView) listViewItem.findViewById(R.id.title);

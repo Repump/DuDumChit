@@ -28,8 +28,6 @@ public class GameActivity extends Activity {
 		player.start();
 		characterView.setRotationX(180);
 
-		TrackInfo[] info = player.getTrackInfo();
-
 	}
 
 	private void initialize() {

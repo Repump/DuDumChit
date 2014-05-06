@@ -24,16 +24,6 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		/*
-		 * // ȯ�� ���� ��ư Button optionButton = (Button)
-		 * findViewById(R.id.option); optionButton.setOnClickListener(new
-		 * OnClickListener() {
-		 * 
-		 * @Override public void onClick(View v) { Intent i = new
-		 * Intent(getApplicationContext(), OptionActivity.class);
-		 * startActivity(i); } });
-		 */
-
 		// Exit Button
 		Button exitButton = (Button) findViewById(R.id.exit);
 		exitButton.setOnClickListener(new OnClickListener() {
