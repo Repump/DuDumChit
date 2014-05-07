@@ -60,7 +60,7 @@ public class GameActivity extends Activity implements OnCompletionListener {
 				super.handleMessage(msg);
 				if (playing) {
 					playBar.setProgress(player.getCurrentPosition());
-					sendEmptyMessageDelayed(0, 100);
+					sendEmptyMessageDelayed(0, 500);
 				}
 			}
 		};
@@ -72,7 +72,7 @@ public class GameActivity extends Activity implements OnCompletionListener {
 
 		// Set Character
 		characterView = (ImageView) findViewById(R.id.character);
-		characterView.setImageResource(R.drawable.dudumchit);
+		characterView.setImageResource(R.drawable.icon);
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class GameActivity extends Activity implements OnCompletionListener {
 
 	private void musicStart() {
 		player.start();
-		handler.sendEmptyMessageDelayed(0, 100);
+		handler.sendEmptyMessageDelayed(0, 500);
 	}
 
 	private void musicStop() {

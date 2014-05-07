@@ -15,10 +15,10 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/game_start"
         android:layout_centerHorizontal="true"
-        android:contentDescription="@drawable/dudumchit"
+        android:contentDescription="@drawable/icon"
         android:paddingBottom="10sp"
         android:scaleType="fitCenter"
-        android:src="@drawable/dudumchit" />
+        android:src="@drawable/icon" />
 
     <Button
         android:id="@+id/game_start"
