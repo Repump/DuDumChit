@@ -9,5 +9,7 @@
     <string name="music_select">음악 선택</string>
     <string name="play">플레이</string>
     <string name="back">뒤로</string>
+    <string name="ok">확인</string>
+    <string name="result">게임 결과</string>
 
 </resources>
