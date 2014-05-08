@@ -1,18 +1,26 @@
 package com.example.dudumchit;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class GameActivity extends Activity implements OnCompletionListener {
+	Context mContext;
+
 	String path;
 	MediaPlayer player;
 	ProgressBar playBar;
@@ -20,14 +28,20 @@ public class GameActivity extends Activity implements OnCompletionListener {
 	boolean playing;
 	Handler handler;
 
+	SoundPool effect;
+	int effectID;
+
 	int score;
 	TextView scoreView;
-	ImageView characterView;
+	ImageView background;
+	ImageButton leftButton, rightButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.game_screen);
+
+		mContext = this;
 
 		Intent i = getIntent();
 		path = i.getExtras().get("path").toString();
@@ -47,6 +61,10 @@ public class GameActivity extends Activity implements OnCompletionListener {
 		}
 		player.setLooping(false);
 		player.setOnCompletionListener(this);
+
+		// Set Effect
+		effect = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+		effectID = effect.load(getBaseContext(), R.raw.effect, 1);
 
 		// Set Play Bar
 		playBar = (ProgressBar) findViewById(R.id.play_time);
@@ -70,9 +88,33 @@ public class GameActivity extends Activity implements OnCompletionListener {
 		scoreView = (TextView) findViewById(R.id.score);
 		scoreView.setText("0");
 
-		// Set Character
-		characterView = (ImageView) findViewById(R.id.character);
-		characterView.setImageResource(R.drawable.icon);
+		// Set Background
+		background = (ImageView) findViewById(R.id.background);
+		background.setImageResource(R.drawable.left);
+
+		// Set Button
+		leftButton = (ImageButton) findViewById(R.id.leftButton);
+		leftButton.setSoundEffectsEnabled(false);
+		leftButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				effect.play(effectID, 1.0f, 1.0f, 0, 0, 1.0f);
+				background.setImageResource(R.drawable.left);
+				score += 100;
+				scoreView.setText("" + score);
+			}
+		});
+		rightButton = (ImageButton) findViewById(R.id.rightButton);
+		rightButton.setSoundEffectsEnabled(false);
+		rightButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				effect.play(effectID, 1.0f, 1.0f, 0, 0, 1.0f);
+				background.setImageResource(R.drawable.right);
+				score += 100;
+				scoreView.setText("" + score);
+			}
+		});
 	}
 
 	@Override
@@ -109,5 +151,6 @@ public class GameActivity extends Activity implements OnCompletionListener {
 	protected void onDestroy() {
 		super.onDestroy();
 		handler = null;
+		effect.release();
 	}
 }
