@@ -11,11 +11,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class GameActivity extends Activity implements OnCompletionListener {
@@ -35,20 +37,25 @@ public class GameActivity extends Activity implements OnCompletionListener {
 	TextView scoreView;
 	ImageView background;
 	ImageButton leftButton, rightButton;
+	GameView noteView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.game_screen);
+		mContext = this;
 
+		// View Setting
 		// LayoutInflater inflater = (LayoutInflater)
 		// getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-		mContext = this;
+		RelativeLayout layout = (RelativeLayout) findViewById(R.layout.game_screen);
+		noteView = new GameView(mContext);
+		// layout.addView(noteView);
+		setContentView(R.layout.game_screen);
 
 		Intent i = getIntent();
 		path = i.getExtras().get("path").toString();
 		Log.i("PATH", path);
+
 		initialize();
 		musicStart();
 	}
