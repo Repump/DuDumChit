@@ -41,6 +41,9 @@ public class GameActivity extends Activity implements OnCompletionListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.game_screen);
 
+		// LayoutInflater inflater = (LayoutInflater)
+		// getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
 		mContext = this;
 
 		Intent i = getIntent();
@@ -153,4 +156,5 @@ public class GameActivity extends Activity implements OnCompletionListener {
 		handler = null;
 		effect.release();
 	}
+
 }

@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class ReadyActivity extends Activity {
 	Uri uri;
@@ -36,7 +37,11 @@ public class ReadyActivity extends Activity {
 				playButton.setEnabled(true);
 			}
 		});
-		MP3List.setAdapter(adapter);
+		if (adapter == null) {
+			TextView noFile = (TextView) findViewById(R.id.no_file);
+			noFile.setText("MP3 파일이 없습니다.");
+		} else
+			MP3List.setAdapter(adapter);
 
 		// Play Button
 		playButton = (Button) findViewById(R.id.play);

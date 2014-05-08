@@ -25,7 +25,6 @@
     </TextView>
 
     <ListView
-        android:scrollbarStyle="outsideInset"
         android:id="@+id/mp3_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,8 +33,18 @@
         android:layout_centerHorizontal="true"
         android:layout_margin="10sp"
         android:choiceMode="singleChoice"
-        android:listSelector="#8800FFFF" >
+        android:listSelector="#8800FFFF"
+        android:scrollbarStyle="outsideInset" >
     </ListView>
+
+    <TextView
+        android:id="@+id/no_file"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/play"
+        android:layout_below="@id/music_select"
+        android:layout_centerHorizontal="true"
+        android:gravity="center" />
 
     <Button
         android:id="@+id/back"
